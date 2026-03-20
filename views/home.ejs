@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: #f4f4f4;
+        }
+
+        .hero {
+            height: 80vh;
+            background: linear-gradient(to right, #007bff, #00c6ff);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+        }
+
+        .hero p {
+            font-size: 20px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            background: white;
+            color: #007bff;
+            border: none;
+            margin-top: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Include -->
+    <%- include("partials/navbar") %>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Welcome to E-Learning 🚀</h1>
+        <p>Learn Anytime, Anywhere</p>
+        <a href="/courses">
+            <button class="btn">Explore Courses</button>
+        </a>
+    </div>
+
+</body>
+</html>

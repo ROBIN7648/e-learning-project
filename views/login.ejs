@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial;
+            background: #f4f4f4;
+            margin: 0;
+        }
+
+        .container {
+            width: 360px;
+            margin: 80px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px gray;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: green;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: darkgreen;
+        }
+
+        /* Navbar (same style) */
+        .navbar {
+            background: #333;
+            padding: 15px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ✅ Navbar SAME -->
+    <div class="navbar">
+        <div><b>E-Learning</b></div>
+        <div>
+            New user? <a href="/register">Register</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Login</h2>
+        <% if (typeof error !=="undefined" ) { %>
+            <p style="color:red; text-align:center;">
+                <%= error %>
+            </p>
+            <% } %>
+
+                <form action="/login" method="POST">
+
+                    <input type="email" name="email" placeholder="Enter Email" required>
+
+                    <input type="password" name="password" placeholder="Enter Password" required>
+
+                    <button type="submit">Login</button>
+
+                </form>
+    </div>
+
+
+</body>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get("success") === "1") {
+        alert("Registration Successful ✅");
+    }
+</script>
+
+
+</html>
