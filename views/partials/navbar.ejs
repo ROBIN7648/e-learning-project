@@ -1,13 +1,14 @@
 <div class="navbar">
     <div><b>E-Learning</b></div>
+
     <div>
         <a href="/">Home</a>
-        <a href="/courses">Courses</a>
-        <a href="/contact">Contact</a>
 
         <% if (user) { %>
+            <a href="/dashboard">Dashboard</a>
             <a href="/logout">Logout</a>
         <% } else { %>
+            <a href="/register">Register</a>
             <a href="/login">Login</a>
         <% } %>
     </div>
@@ -16,7 +17,7 @@
 <style>
 .navbar {
     background: #333;
-    padding: 15px;
+    padding: 15px 20px;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -24,8 +25,8 @@
 
 .navbar a {
     color: white;
-    margin: 0 10px;
     text-decoration: none;
+    margin-left: 15px;
 }
 
 .navbar a:hover {

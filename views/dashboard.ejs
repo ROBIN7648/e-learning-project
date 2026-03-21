@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: #f4f4f4;
+        }
+
+        /* 🔥 NAVBAR */
+        .navbar {
+            background: #333;
+            padding: 15px;
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo {
+            flex: 1;
+            font-weight: bold;
+        }
+
+        .nav-left {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .nav-right {
+            flex: 1;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            color: yellow;
+        }
+
+        /* 🔥 LOGOUT BUTTON STYLE */
+        .nav-right a {
+            background: red;
+            padding: 6px 12px;
+            border-radius: 5px;
+        }
+
+        /* 🔥 MAIN CONTENT */
+        .container {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            width: 320px;
+            margin: auto;
+            box-shadow: 0 0 10px gray;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include("partials/footer") %>
+
+    <!-- 🔥 NAVBAR -->
+    <div class="navbar">
+        <div class="logo">E-Learning Dashboard</div>
+
+        <div class="nav-left">
+            <a href="/courses">Courses</a>
+            <a href="live">Live Classes</a>
+            <a href="timeTable">Time Table</a>
+            <a href="upComing">UpComing Class</a>
+        </div>
+
+        <div class="nav-right">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+
+    <!-- 🔥 USER CARD -->
+    <div class="container">
+        <div class="card">
+            <h2>Welcome 👋</h2>
+            <p><b>Name:</b> <%= user.name %></p>
+            <p><b>Email:</b> <%= user.email %></p>
+        </div>
+    </div>
+
+</body>
+</html>

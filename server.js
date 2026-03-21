@@ -3,7 +3,9 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const session = require("express-session");
+const bcrypt = require("bcrypt");
 const User = require("./models/user");
+const Feedback = require("./models/feedback");
 
 const app = express();
 const PORT = 8000;
@@ -11,18 +13,16 @@ const PORT = 8000;
 // middleware
 app.use(express.urlencoded({ extended: true }));
 
-
-
-// 🔥 session setup
+// session
 app.use(session({
     secret: "mysecretkey",
     resave: false,
-    saveUninitialized: false // ⚠️ IMPORTANT FIX
+    saveUninitialized: false
 }));
 
-// 🔥 THEN locals middleware
+// user for navbar
 app.use((req, res, next) => {
-    res.locals.user = req.session.user;
+    res.locals.user = req.session ? req.session.user : null;
     next();
 });
 
@@ -30,47 +30,62 @@ app.use((req, res, next) => {
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// 🔥 MongoDB connect
+// DB connect
 mongoose.connect("mongodb://127.0.0.1:27017/e_learning")
 .then(() => console.log("MongoDB Connected ✅"))
 .catch(err => console.log(err));
 
-
-// 🔒 AUTH MIDDLEWARE (FINAL)
+// 🔒 AUTH MIDDLEWARE
 function isAuth(req, res, next) {
-    if (req.session && req.session.user && req.session.user._id) {
+    if (req.session && req.session.user) {
         return next();
     }
     return res.redirect("/login");
 }
 
-
 // ================= ROUTES =================
 
-// ❌ Protected route
-app.get("/", isAuth, (req, res) => {
-    console.log("SESSION:", req.session); // 👈 ADD THIS
+// home (optional)
+app.get("/", (req, res) => {
     res.render("home", { title: "Home" });
 });
 
-// public routes
+// dashboard (main protected page)
+app.get("/dashboard", isAuth, (req, res) => {
+    res.render("dashboard", {
+        user: req.session.user
+    });
+});
+
+// register page
 app.get("/register", (req, res) => {
     res.render("register");
 });
 
+// login page
 app.get("/login", (req, res) => {
+    if (req.session.user) {
+        return res.redirect("/dashboard");
+    }
     res.render("login");
 });
 
-
-// 🔥 REGISTER
+// 🔐 REGISTER
 app.post("/register", async (req, res) => {
     let { name, email, number, password } = req.body;
 
+    name = name.trim();
     email = email.trim();
+    number = number.trim();
+    password = password.trim();
+
+    if (!name || !email || !number || !password) {
+        return res.render("register", {
+            error: "All fields required ❌"
+        });
+    }
 
     try {
-        // 🔥 check if user already exists
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
@@ -79,11 +94,14 @@ app.post("/register", async (req, res) => {
             });
         }
 
+        // 🔐 hash password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
         const user = new User({
             name,
             email,
             number,
-            password
+            password: hashedPassword
         });
 
         await user.save();
@@ -96,7 +114,7 @@ app.post("/register", async (req, res) => {
     }
 });
 
-// 🔥 LOGIN
+// 🔐 LOGIN
 app.post("/login", async (req, res) => {
     let { email, password } = req.body;
 
@@ -112,14 +130,16 @@ app.post("/login", async (req, res) => {
             });
         }
 
-        if (user.password !== password) {
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
             return res.render("login", {
                 error: "Wrong password ❌"
             });
         }
 
         req.session.user = user;
-        return res.redirect("/");
+        return res.redirect("/dashboard");
 
     } catch (err) {
         console.log(err);
@@ -127,15 +147,59 @@ app.post("/login", async (req, res) => {
     }
 });
 
-
-// 🔥 LOGOUT
+// logout
 app.get("/logout", (req, res) => {
-    console.log("Logout route hit ✅");
     req.session.destroy(() => {
         res.redirect("/login");
     });
 });
 
+
+// feedback page
+app.get("/feedback", (req, res) => {
+    res.render("feedback");
+});
+
+// submit feedback
+app.post("/feedback", async (req, res) => {
+    let { name, email, message } = req.body;
+
+    name = name.trim();
+    email = email.trim();
+    message = message.trim();
+
+    if (!name || !email || !message) {
+        return res.render("feedback", {
+            error: "All fields required ❌"
+        });
+    }
+
+    try {
+        const newFeedback = new Feedback({ name, email, message });
+        await newFeedback.save();
+
+        res.render("feedback", {
+            success: "Feedback submitted successfully ✅"
+        });
+
+    } catch (err) {
+        console.log(err);
+        res.send("Error ❌");
+    }
+});
+
+
+app.get("/about", (req, res) => {
+    res.render("about");
+});
+
+app.get("/contact", (req, res) => {
+    res.render("contact");
+});
+
+app.get("/feedback", (req, res) => {
+    res.send("Feedback Page");
+});
 
 // server start
 app.listen(PORT, () => {

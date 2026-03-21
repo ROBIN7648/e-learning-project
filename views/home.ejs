@@ -2,62 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title><%= title %></title>
+    <title>Home</title>
 
     <style>
-        body {
-            margin: 0;
-            font-family: Arial;
-            background: #f4f4f4;
+        * {
+            box-sizing: border-box;
         }
 
-        .hero {
-            height: 80vh;
-            background: linear-gradient(to right, #007bff, #00c6ff);
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 🔥 NAVBAR */
+        .navbar {
+            background: #333;
+            padding: 15px 20px;
             color: white;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        .navbar a:hover {
+            color: yellow;
+        }
+
+        /* 🔥 HERO (FULL SCREEN) */
+        .hero {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
+            background: linear-gradient(to right, #1e90ff, #00c6ff);
+            color: white;
             text-align: center;
+            padding: 20px;
         }
 
         .hero h1 {
-            font-size: 50px;
+            font-size: 3rem;
         }
 
         .hero p {
-            font-size: 20px;
+            margin: 15px 0;
+            font-size: 1.2rem;
         }
 
-        .btn {
+        .hero button {
             padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
             background: white;
             color: #007bff;
-            border: none;
-            margin-top: 20px;
             cursor: pointer;
-            border-radius: 5px;
         }
 
-        .btn:hover {
+        .hero button:hover {
             background: #ddd;
         }
+
+
     </style>
 </head>
+
 <body>
 
-    <!-- Navbar Include -->
-    <%- include("partials/navbar") %>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div><b>E-Learning</b></div>
+        <div>
+            <a href="/">Home</a>
+            <a href="/register">Register</a>
+            <a href="/login">Login</a>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <div class="hero">
         <h1>Welcome to E-Learning 🚀</h1>
         <p>Learn Anytime, Anywhere</p>
-        <a href="/courses">
-            <button class="btn">Explore Courses</button>
-        </a>
+        <button>Explore Courses</button>
     </div>
+
+<%- include("partials/footer") %>
 
 </body>
 </html>

@@ -8,46 +8,78 @@
     <style>
         * {
             box-sizing: border-box;
-            /* 🔥 overflow fix */
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: Arial;
+            background: #f4f4f4;
         }
 
         body {
-            font-family: Arial;
-            background: #f4f4f4;
-            margin: 0;
+            display: flex;
+            flex-direction: column;
         }
 
+        /* 🔥 NAVBAR */
+        .navbar {
+            background: #333;
+            padding: 15px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 10px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            color: yellow;
+        }
+
+        /* 🔥 MAIN CENTER FIX */
+        .main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 🔥 FORM CARD */
         .container {
             width: 360px;
-            margin: 80px auto;
             background: white;
             padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px gray;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
         }
 
         h2 {
             margin-bottom: 15px;
+            text-align: center;
         }
 
         input {
             width: 100%;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 12px;
+            margin: 12px 0;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 6px;
         }
 
-        /* 🔥 Mobile fix */
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* 🔥 MOBILE INPUT */
         .mobile-group {
             display: flex;
             gap: 8px;
-            margin: 10px 0;
-        }
-
-        .mobile-group input {
-            margin: 0;
-            /* remove extra margin */
         }
 
         .country-code {
@@ -66,7 +98,7 @@
             background: #007bff;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             margin-top: 10px;
             cursor: pointer;
             font-size: 16px;
@@ -76,65 +108,57 @@
             background: #0056b3;
         }
 
-        /* Navbar (same as yours, just slight polish) */
-        .navbar {
-            background: #333;
-            padding: 15px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .navbar a {
-            color: white;
-            margin-left: 10px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            color: yellow;
-        }
     </style>
 </head>
 
 <body>
 
-    <!-- ✅ Navbar SAME (no logic change) -->
+    <!-- Navbar -->
     <div class="navbar">
         <div><b>E-Learning</b></div>
         <div>
-            If you are register? <a href="/login">Login</a>
+            <a href="/">Home</a>
+            <a href="/login">Login</a>
         </div>
     </div>
 
-    <div class="container">
-        <h2>Register</h2>
-        <% if (typeof error !=="undefined" ) { %>
-            <p style="color:red; text-align:center;">
-                <%= error %>
-            </p>
+    <!-- 🔥 MAIN CENTER -->
+    <div class="main">
+        <div class="container">
+
+            <h2>Register</h2>
+
+            <% if (typeof error !== "undefined") { %>
+                <p style="color:red; text-align:center;">
+                    <%= error %>
+                </p>
             <% } %>
 
-                <form action="/register" method="POST">
+            <form action="/register" method="POST">
 
-                    <input type="text" name="name" placeholder="Enter Name" required>
+                <input type="text" name="name" placeholder="Enter Name" required>
 
-                    <input type="email" name="email" placeholder="Enter Email" required>
+                <input type="email" name="email" placeholder="Enter Email" required>
 
-                    <!-- ✅ FIXED MOBILE INPUT -->
-                    <div class="mobile-group">
-                        <input type="text" value="+91" readonly class="country-code">
+                <div class="mobile-group">
+                    <input type="text" value="+91" readonly class="country-code">
 
-                        <input type="tel" name="number" class="mobile-number" placeholder="Enter Mobile Number"
-                            pattern="[6-9][0-9]{9}" maxlength="10" required>
-                    </div>
+                    <input type="tel" name="number" class="mobile-number"
+                        placeholder="Enter Mobile Number"
+                        pattern="[6-9][0-9]{9}" maxlength="10" required>
+                </div>
 
-                    <input type="password" name="password" placeholder="Enter Password" required>
+                <input type="password" name="password" placeholder="Enter Password" required>
 
-                    <button type="submit">Register</button>
+                <button type="submit">Register</button>
 
-                </form>
+            </form>
+
+        </div>
     </div>
+
+    <!-- Footer -->
+    <%- include("partials/footer") %>
 
 </body>
 
