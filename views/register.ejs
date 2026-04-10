@@ -22,25 +22,6 @@
             flex-direction: column;
         }
 
-        /* 🔥 NAVBAR */
-        .navbar {
-            background: #333;
-            padding: 15px 20px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .navbar a {
-            color: white;
-            margin-left: 10px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            color: yellow;
-        }
-
         /* 🔥 MAIN CENTER FIX */
         .main {
             flex: 1;
@@ -113,14 +94,7 @@
 
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <div><b>E-Learning</b></div>
-        <div>
-            <a href="/">Home</a>
-            <a href="/login">Login</a>
-        </div>
-    </div>
+    <%- include("partials/navbar") %>
 
     <!-- 🔥 MAIN CENTER -->
     <div class="main">

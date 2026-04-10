@@ -20,29 +20,8 @@
             flex-direction: column;
         }
 
-        /* 🔥 NAVBAR */
-        .navbar {
-            background: #333;
-            padding: 15px 20px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-left: 15px;
-        }
-
-        .navbar a:hover {
-            color: yellow;
-        }
-
         /* 🔥 HERO (FULL SCREEN) */
         .hero {
-            flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -75,28 +54,111 @@
             background: #ddd;
         }
 
+        .courses {
+            background: #f4f4f4;
+            padding: 50px 20px 70px;
+        }
+
+        .courses h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .courses-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .course-card h3 {
+            margin: 0 0 8px;
+        }
+
+        .course-card p {
+            margin: 0;
+            color: #555;
+        }
+
+        .course-cta {
+            display: block;
+            width: fit-content;
+            margin: 24px auto 0;
+            padding: 10px 18px;
+            border-radius: 6px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+        }
+
+        .course-cta:hover {
+            background: #0056b3;
+        }
+
 
     </style>
 </head>
 
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <div><b>E-Learning</b></div>
-        <div>
-            <a href="/">Home</a>
-            <a href="/register">Register</a>
-            <a href="/login">Login</a>
-        </div>
-    </div>
+    <%- include("partials/navbar") %>
 
     <!-- Hero Section -->
     <div class="hero">
         <h1>Welcome to E-Learning 🚀</h1>
         <p>Learn Anytime, Anywhere</p>
-        <button>Explore Courses</button>
     </div>
+
+    <section class="courses">
+        <h2>Explore Courses</h2>
+        <div class="courses-grid">
+            <div class="course-card">
+                <h3>HTML & CSS</h3>
+                <p>Build clean, responsive layouts from scratch.</p>
+            </div>
+            <div class="course-card">
+                <h3>JavaScript Essentials</h3>
+                <p>Learn variables, functions, DOM, and async flow.</p>
+            </div>
+            <div class="course-card">
+                <h3>Node.js & Express</h3>
+                <p>Create fast APIs and server-side apps.</p>
+            </div>
+            <div class="course-card">
+                <h3>MongoDB Basics</h3>
+                <p>Design schemas and query data efficiently.</p>
+            </div>
+            <div class="course-card">
+                <h3>React Fundamentals</h3>
+                <p>Build reusable UI with components and hooks.</p>
+            </div>
+            <div class="course-card">
+                <h3>Python for Beginners</h3>
+                <p>Start coding with syntax, loops, and functions.</p>
+            </div>
+            <div class="course-card">
+                <h3>Data Structures</h3>
+                <p>Learn arrays, stacks, queues, and linked lists.</p>
+            </div>
+            <div class="course-card">
+                <h3>UI/UX Basics</h3>
+                <p>Design clean interfaces and improve usability.</p>
+            </div>
+            <div class="course-card">
+                <h3>Git & GitHub</h3>
+                <p>Version control, branching, and collaboration.</p>
+            </div>
+        </div>
+        <a class="course-cta" href="/courses">See all courses</a>
+    </section>
 
 <%- include("partials/footer") %>
 

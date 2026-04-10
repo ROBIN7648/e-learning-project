@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%= title || "Time Table" %></title>
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, sans-serif;
+			background: #f4f4f4;
+		}
+
+		.content {
+			max-width: 960px;
+			margin: 48px auto;
+			padding: 0 20px 40px;
+		}
+
+		.panel {
+			background: white;
+			border-radius: 16px;
+			padding: 32px;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+		}
+
+		table {
+			width: 100%;
+			border-collapse: collapse;
+			margin-top: 18px;
+		}
+
+		th, td {
+			border: 1px solid #e3e8ef;
+			padding: 14px;
+			text-align: left;
+		}
+
+		th {
+			background: #eef4ff;
+		}
+	</style>
+</head>
+<body>
+	<%- include("partials/navbar") %>
+
+	<main class="content">
+		<section class="panel">
+			<h1>Time Table</h1>
+			<p>Weekly schedule for classes and self-study blocks.</p>
+
+			<table>
+				<tr>
+					<th>Day</th>
+					<th>Topic</th>
+					<th>Time</th>
+				</tr>
+				<tr>
+					<td>Monday</td>
+					<td>Frontend Basics</td>
+					<td>10:00 AM</td>
+				</tr>
+				<tr>
+					<td>Wednesday</td>
+					<td>JavaScript Practice</td>
+					<td>2:00 PM</td>
+				</tr>
+				<tr>
+					<td>Friday</td>
+					<td>Live Q&A</td>
+					<td>7:00 PM</td>
+				</tr>
+			</table>
+		</section>
+	</main>
+
+	<%- include("partials/footer") %>
+</body>
+</html>

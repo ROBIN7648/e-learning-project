@@ -3,33 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        body {
-            font-family: Arial;
-            margin: 0;
-            background: #f4f4f4;
+        @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap");
+
+        :root {
+            --ink: #0f172a;
+            --muted: #5b6575;
+            --accent: #12b981;
+            --accent-dark: #0f8f63;
+            --nav: #131722;
+            --surface: #ffffff;
+            --line: #e6e9ef;
+            --shadow: 0 16px 36px rgba(15, 23, 42, 0.15);
         }
 
-        /* 🔥 NAVBAR */
+        html, body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Manrope", sans-serif;
+            color: var(--ink);
+            background: radial-gradient(circle at 20% 10%, #e2f7f0 0%, #f4f6fb 35%, #f1f3f8 100%);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-shell {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
         .navbar {
-            background: #333;
-            padding: 15px;
+            background: var(--nav);
+            padding: 16px 28px;
             color: white;
             display: flex;
             align-items: center;
+            gap: 24px;
+            position: sticky;
+            top: 0;
+            z-index: 5;
         }
 
         .logo {
             flex: 1;
-            font-weight: bold;
+            font-family: "Space Grotesk", sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.4px;
         }
 
         .nav-left {
             flex: 2;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 22px;
+            font-size: 14px;
         }
 
         .nav-right {
@@ -39,69 +73,226 @@
         }
 
         .navbar a {
-            color: white;
+            color: #e2e8f0;
             text-decoration: none;
+            font-weight: 600;
         }
 
         .navbar a:hover {
-            color: yellow;
+            color: white;
         }
 
-        /* 🔥 LOGOUT BUTTON STYLE */
         .nav-right a {
-            background: red;
-            padding: 6px 12px;
-            border-radius: 5px;
+            background: #ff5a5f;
+            padding: 7px 16px;
+            border-radius: 999px;
         }
 
-        /* 🔥 MAIN CONTENT */
         .container {
-            padding: 40px;
-            text-align: center;
+            flex: 1;
+            max-width: 1080px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 36px 24px 60px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+            gap: 24px;
         }
 
-        .card {
-            background: white;
-            padding: 25px;
+        .hero {
+            background: var(--surface);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--line);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(130deg, rgba(18, 185, 129, 0.15), rgba(18, 185, 129, 0));
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            margin: 0 0 6px;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 28px;
+        }
+
+        .hero p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .stats {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+
+        .stat {
+            background: #f6f8fc;
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid #eef1f6;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .stat span {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .profile {
+            background: var(--surface);
+            border-radius: 18px;
+            padding: 26px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--line);
+            display: grid;
+            gap: 14px;
+        }
+
+        .profile h2 {
+            margin: 0;
+            font-family: "Space Grotesk", sans-serif;
+        }
+
+        .profile p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .actions a {
+            text-decoration: none;
+            padding: 10px 14px;
+            background: var(--accent);
+            color: white;
             border-radius: 10px;
-            width: 320px;
-            margin: auto;
-            box-shadow: 0 0 10px gray;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.2s ease, background 0.2s ease;
         }
 
-        h2 {
-            margin-bottom: 15px;
+        .actions a.secondary {
+            background: #111827;
+        }
+
+        .actions a:hover {
+            background: var(--accent-dark);
+            transform: translateY(-1px);
+        }
+
+        .actions a.secondary:hover {
+            background: #0b1220;
+        }
+
+        .fade-in {
+            animation: fadeUp 0.7s ease both;
+        }
+
+        .delay-1 {
+            animation-delay: 0.1s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-left {
+                display: none;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="page-shell">
+        <!-- 🔥 NAVBAR -->
+        <div class="navbar fade-in">
+            <div class="logo">E-Learning Dashboard</div>
+
+            <div class="nav-left">
+                <a href="/courses">Courses</a>
+                <a href="/live">Live Classes</a>
+                <a href="/timeTable">Time Table</a>
+                <a href="/upComing">UpComing Class</a>
+            </div>
+
+            <div class="nav-right">
+                <a href="/logout">Logout</a>
+            </div>
+        </div>
+
+        <div class="container">
+            <section class="hero fade-in delay-1">
+                <h1>Welcome back, <%= user.name %> 👋</h1>
+                <p>Quickly jump into your learning flow and track progress.</p>
+
+                <div class="stats">
+                    <div class="stat">
+                        <strong>08</strong>
+                        <span>Courses enrolled</span>
+                    </div>
+                    <div class="stat">
+                        <strong>76%</strong>
+                        <span>Weekly progress</span>
+                    </div>
+                    <div class="stat">
+                        <strong>04</strong>
+                        <span>Live sessions</span>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="profile fade-in delay-2">
+                <div>
+                    <h2>Your Profile</h2>
+                    <p><strong>Name:</strong> <%= user.name %></p>
+                    <p><strong>Email:</strong> <%= user.email %></p>
+                </div>
+
+                <div class="actions">
+                    <a href="/courses">Continue Learning<span>→</span></a>
+                </div>
+            </aside>
+        </div>
+    </div>
+
     <%- include("partials/footer") %>
-
-    <!-- 🔥 NAVBAR -->
-    <div class="navbar">
-        <div class="logo">E-Learning Dashboard</div>
-
-        <div class="nav-left">
-            <a href="/courses">Courses</a>
-            <a href="live">Live Classes</a>
-            <a href="timeTable">Time Table</a>
-            <a href="upComing">UpComing Class</a>
-        </div>
-
-        <div class="nav-right">
-            <a href="/logout">Logout</a>
-        </div>
-    </div>
-
-    <!-- 🔥 USER CARD -->
-    <div class="container">
-        <div class="card">
-            <h2>Welcome 👋</h2>
-            <p><b>Name:</b> <%= user.name %></p>
-            <p><b>Email:</b> <%= user.email %></p>
-        </div>
-    </div>
 
 </body>
 </html>

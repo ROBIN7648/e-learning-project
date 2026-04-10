@@ -11,25 +11,6 @@
             background: #f4f4f4;
         }
 
-        /* NAVBAR */
-        .navbar {
-            background: #333;
-            padding: 15px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .navbar a {
-            color: white;
-            margin-left: 10px;
-            text-decoration: none;
-        }
-
-        .navbar a:hover {
-            color: yellow;
-        }
-
         /* MAIN */
         .container {
             padding: 40px;
@@ -57,14 +38,7 @@
 
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <div><b>E-Learning</b></div>
-        <div>
-            <a href="/">Home</a>
-            <a href="/dashboard">Dashboard</a>
-        </div>
-    </div>
+    <%- include("partials/navbar") %>
 
     <!-- About Content -->
     <div class="container">
@@ -92,6 +66,8 @@
             </p>
         </div>
     </div>
+
+    <%- include("partials/footer") %>
 
 </body>
 </html>

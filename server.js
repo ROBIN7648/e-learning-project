@@ -35,12 +35,21 @@ mongoose.connect("mongodb://127.0.0.1:27017/e_learning")
 .then(() => console.log("MongoDB Connected ✅"))
 .catch(err => console.log(err));
 
-// 🔒 AUTH MIDDLEWARE
+
 function isAuth(req, res, next) {
     if (req.session && req.session.user) {
         return next();
     }
     return res.redirect("/login");
+}
+
+function renderProtectedPage(view, title) {
+    return (req, res) => {
+        res.render(view, {
+            title,
+            user: req.session.user
+        });
+    };
 }
 
 // ================= ROUTES =================
@@ -56,6 +65,11 @@ app.get("/dashboard", isAuth, (req, res) => {
         user: req.session.user
     });
 });
+
+app.get("/courses", isAuth, renderProtectedPage("courses", "Courses"));
+app.get("/live", isAuth, renderProtectedPage("live", "Live Classes"));
+app.get("/timeTable", isAuth, renderProtectedPage("timeTable", "Time Table"));
+app.get("/upComing", isAuth, renderProtectedPage("upComing", "Upcoming Classes"));
 
 // register page
 app.get("/register", (req, res) => {
@@ -81,7 +95,7 @@ app.post("/register", async (req, res) => {
 
     if (!name || !email || !number || !password) {
         return res.render("register", {
-            error: "All fields required ❌"
+            error: "All fields required "
         });
     }
 
@@ -90,11 +104,11 @@ app.post("/register", async (req, res) => {
 
         if (existingUser) {
             return res.render("register", {
-                error: "Email already registered ❌"
+                error: "Email already registered "
             });
         }
 
-        // 🔐 hash password
+        
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const user = new User({
@@ -110,11 +124,11 @@ app.post("/register", async (req, res) => {
 
     } catch (err) {
         console.log(err);
-        res.send("Error in Register ❌");
+        res.send("Error in Register ");
     }
 });
 
-// 🔐 LOGIN
+//  LOGIN
 app.post("/login", async (req, res) => {
     let { email, password } = req.body;
 
@@ -126,7 +140,7 @@ app.post("/login", async (req, res) => {
 
         if (!user) {
             return res.render("login", {
-                error: "User not found ❌"
+                error: "User not found "
             });
         }
 
@@ -134,7 +148,7 @@ app.post("/login", async (req, res) => {
 
         if (!isMatch) {
             return res.render("login", {
-                error: "Wrong password ❌"
+                error: "Wrong password "
             });
         }
 
@@ -143,7 +157,7 @@ app.post("/login", async (req, res) => {
 
     } catch (err) {
         console.log(err);
-        res.send("Error in Login ❌");
+        res.send("Error in Login ");
     }
 });
 
@@ -179,7 +193,7 @@ app.post("/feedback", async (req, res) => {
         await newFeedback.save();
 
         res.render("feedback", {
-            success: "Feedback submitted successfully ✅"
+            success: "Feedback submitted successfully "
         });
 
     } catch (err) {
@@ -195,10 +209,6 @@ app.get("/about", (req, res) => {
 
 app.get("/contact", (req, res) => {
     res.render("contact");
-});
-
-app.get("/feedback", (req, res) => {
-    res.send("Feedback Page");
 });
 
 // server start

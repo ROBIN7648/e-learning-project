@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%= title || "Courses" %></title>
+	<style>
+		body {
+			margin: 0;
+			font-family: Arial, sans-serif;
+			background: #f4f4f4;
+		}
+
+		.content {
+			max-width: 960px;
+			margin: 48px auto;
+			padding: 0 20px 40px;
+		}
+
+		.hero {
+			background: white;
+			border-radius: 16px;
+			padding: 32px;
+			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: 16px;
+			margin-top: 24px;
+		}
+
+		.card {
+			background: linear-gradient(180deg, #ffffff, #f8fbff);
+			border: 1px solid #e7edf5;
+			border-radius: 14px;
+			padding: 20px;
+		}
+	</style>
+</head>
+<body>
+	<%- include("partials/navbar") %>
+
+	<main class="content">
+		<section class="hero">
+			<h1>Courses</h1>
+			<p>Browse the learning tracks available in the dashboard.</p>
+
+			<div class="grid">
+				<div class="card">
+					<h3>Frontend Basics</h3>
+					<p>HTML, CSS, and responsive design fundamentals.</p>
+				</div>
+				<div class="card">
+					<h3>JavaScript Core</h3>
+					<p>Variables, functions, DOM, and asynchronous flow.</p>
+				</div>
+				<div class="card">
+					<h3>Backend Essentials</h3>
+					<p>Express, MongoDB, sessions, and authentication.</p>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<%- include("partials/footer") %>
+</body>
+</html>

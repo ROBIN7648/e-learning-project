@@ -15,25 +15,6 @@
             background: #f4f4f4;
         }
 
-        /* 🔥 NAVBAR */
-        .navbar {
-            background: #333;
-            padding: 15px;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .navbar a {
-            color: white;
-            text-decoration: none;
-            margin-left: 10px;
-        }
-
-        .navbar a:hover {
-            color: yellow;
-        }
-
         /* 🔥 CONTAINER */
         .container {
             width: 400px;
@@ -108,14 +89,7 @@
 
 <body>
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <div><b>E-Learning</b></div>
-        <div>
-            <a href="/">Home</a>
-            <a href="/dashboard">Dashboard</a>
-        </div>
-    </div>
+    <%- include("partials/navbar") %>
 
     <!-- Form -->
     <div class="container">
@@ -137,6 +111,8 @@
             <button type="submit">Submit Feedback</button>
         </form>
     </div>
+
+    <%- include("partials/footer") %>
 
 </body>
 </html>
