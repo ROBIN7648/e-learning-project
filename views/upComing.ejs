@@ -5,31 +5,101 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><%= title || "Upcoming Classes" %></title>
 	<style>
-		body {
-			margin: 0;
-			font-family: Arial, sans-serif;
-			background: #f4f4f4;
-		}
-
 		.content {
-			max-width: 960px;
-			margin: 48px auto;
-			padding: 0 20px 40px;
+			max-width: 1500px;
+			margin: 40px auto 70px;
+			padding: 0 32px;
 		}
 
 		.panel {
-			background: white;
-			border-radius: 16px;
-			padding: 32px;
-			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 18px;
+			padding: 26px;
+			border: 1px solid var(--line);
+			box-shadow: var(--shadow);
+		}
+
+		.header {
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			justify-content: space-between;
+			gap: 16px;
+		}
+
+		.meta-row {
+			margin-top: 18px;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 12px;
+		}
+
+		.meta-card {
+			background: #fffaf4;
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			padding: 14px 16px;
+		}
+
+		.meta-card strong {
+			display: block;
+			font-size: 18px;
+		}
+
+		.meta-card span {
+			font-size: 12px;
+			color: var(--muted);
+		}
+
+		.grid {
+			margin-top: 22px;
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 16px;
 		}
 
 		.item {
-			margin-top: 16px;
-			padding: 16px 18px;
-			background: #f8fbff;
-			border: 1px solid #e3e8ef;
-			border-radius: 12px;
+			padding: 14px 16px;
+			background: #fffaf4;
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			display: grid;
+			gap: 8px;
+		}
+
+		.item span {
+			font-size: 12px;
+			color: var(--muted);
+		}
+
+		.tag {
+			display: inline-flex;
+			align-items: center;
+			padding: 4px 10px;
+			border-radius: 999px;
+			background: rgba(240, 97, 58, 0.15);
+			border: 1px solid var(--line);
+			font-size: 12px;
+			font-weight: 600;
+			width: fit-content;
+		}
+
+		@media (max-width: 1100px) {
+			.grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+			.meta-row {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		@media (max-width: 720px) {
+			.grid {
+				grid-template-columns: 1fr;
+			}
+			.meta-row {
+				grid-template-columns: 1fr;
+			}
 		}
 	</style>
 </head>
@@ -38,16 +108,75 @@
 
 	<main class="content">
 		<section class="panel">
-			<h1>Upcoming Classes</h1>
-			<p>Classes scheduled for the next few days.</p>
-
-			<div class="item">
-				<strong>MongoDB Deep Dive</strong>
-				<div>Tuesday, 5:00 PM</div>
+			<div class="header">
+				<div>
+					<h1>Upcoming Lessons</h1>
+					<p>Full-week schedule with focus topics and live sessions.</p>
+				</div>
+				<div class="tag">Week 03 · April</div>
 			</div>
-			<div class="item">
-				<strong>Express Routing Review</strong>
-				<div>Thursday, 6:00 PM</div>
+
+			<div class="meta-row">
+				<div class="meta-card">
+					<strong>9 lessons</strong>
+					<span>Across 5 learning tracks</span>
+				</div>
+				<div class="meta-card">
+					<strong>3 live sessions</strong>
+					<span>Q&A + reviews included</span>
+				</div>
+				<div class="meta-card">
+					<strong>2 project reviews</strong>
+					<span>Portfolio focused</span>
+				</div>
+			</div>
+
+			<div class="grid">
+				<div class="item">
+					<strong>MongoDB Deep Dive</strong>
+					<span>Tuesday · 5:00 PM</span>
+					<div>Focus: aggregation pipelines</div>
+				</div>
+				<div class="item">
+					<strong>Express Routing Review</strong>
+					<span>Thursday · 6:00 PM</span>
+					<div>Focus: middleware order</div>
+				</div>
+				<div class="item">
+					<strong>React State Clinic</strong>
+					<span>Friday · 3:30 PM</span>
+					<div>Focus: useReducer patterns</div>
+				</div>
+				<div class="item">
+					<strong>Portfolio Workshop</strong>
+					<span>Saturday · 11:00 AM</span>
+					<div>Focus: case study writeups</div>
+				</div>
+				<div class="item">
+					<strong>Data Structures Lab</strong>
+					<span>Sunday · 2:00 PM</span>
+					<div>Focus: stacks and queues</div>
+				</div>
+				<div class="item">
+					<strong>Career Prep Sprint</strong>
+					<span>Sunday · 6:00 PM</span>
+					<div>Focus: resume polish</div>
+				</div>
+				<div class="item">
+					<strong>Frontend Accessibility</strong>
+					<span>Monday · 4:00 PM</span>
+					<div>Focus: ARIA and keyboard navigation</div>
+				</div>
+				<div class="item">
+					<strong>Node API Debugging</strong>
+					<span>Wednesday · 6:30 PM</span>
+					<div>Focus: error handling patterns</div>
+				</div>
+				<div class="item">
+					<strong>Design Systems Clinic</strong>
+					<span>Saturday · 5:30 PM</span>
+					<div>Focus: tokens and components</div>
+				</div>
 			</div>
 		</section>
 	</main>

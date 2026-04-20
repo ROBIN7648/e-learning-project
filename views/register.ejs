@@ -10,63 +10,89 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-            margin: 0;
-            font-family: Arial;
-            background: #f4f4f4;
+        body.auth {
+            color: var(--ink);
         }
 
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* 🔥 MAIN CENTER FIX */
-        .main {
+        .auth-main {
             flex: 1;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            padding: 32px 12px 60px;
         }
 
-        /* 🔥 FORM CARD */
-        .container {
-            width: 360px;
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        .auth-shell {
+            width: 100%;
+            max-width: 980px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: var(--shadow);
         }
 
-        h2 {
-            margin-bottom: 15px;
-            text-align: center;
+        .auth-left h2 {
+            margin: 0 0 10px;
+            font-family: "Fraunces", serif;
+            font-size: 30px;
+        }
+
+        .auth-left p {
+            margin: 0 0 14px;
+            color: var(--muted);
+        }
+
+        .auth-card {
+            background: #fffaf4;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .auth-card h3 {
+            margin: 0 0 14px;
+            font-size: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            margin: 10px 0 6px;
+            color: var(--muted);
         }
 
         input {
             width: 100%;
-            padding: 12px;
-            margin: 12px 0;
-            border: 1px solid #ccc;
-            border-radius: 6px;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 14px;
+            background: #ffffff;
         }
 
-        input:focus {
-            border-color: #007bff;
-            outline: none;
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 14px;
+            background: #ffffff;
         }
 
-        /* 🔥 MOBILE INPUT */
         .mobile-group {
             display: flex;
             gap: 8px;
+            align-items: center;
         }
 
         .country-code {
-            width: 65px;
+            width: 64px;
             text-align: center;
-            background: #eee;
+            background: #f5eadf;
         }
 
         .mobile-number {
@@ -75,59 +101,105 @@
 
         button {
             width: 100%;
-            padding: 12px;
-            background: #007bff;
+            padding: 10px 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
             color: white;
             border: none;
-            border-radius: 6px;
-            margin-top: 10px;
+            border-radius: 999px;
+            margin-top: 14px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 14px;
+            font-weight: 600;
         }
 
         button:hover {
-            background: #0056b3;
+            opacity: 0.92;
         }
 
+        .msg {
+            margin: 0 0 10px;
+            color: #b91c1c;
+            font-size: 13px;
+        }
+
+        .helper {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .helper a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .helper a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .auth-shell {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 
-<body>
+<body class="auth">
 
     <%- include("partials/navbar") %>
 
     <!-- 🔥 MAIN CENTER -->
-    <div class="main">
-        <div class="container">
+    <div class="auth-main">
+        <div class="auth-shell">
+            <div class="auth-left">
+                <h2>Create your account</h2>
+                <p>Join a learning plan built around practice, live sessions, and clear goals.</p>
+                <p>Track progress and revisit lessons anytime.</p>
+            </div>
 
-            <h2>Register</h2>
+            <div class="auth-card">
+                <h3>Register</h3>
 
-            <% if (typeof error !== "undefined") { %>
-                <p style="color:red; text-align:center;">
-                    <%= error %>
-                </p>
-            <% } %>
+                <% if (typeof error !== "undefined") { %>
+                    <p class="msg"><%= error %></p>
+                <% } %>
 
-            <form action="/register" method="POST">
+                <form action="/register" method="POST">
+                    <label for="register-role">Role</label>
+                    <select id="register-role" name="role" required>
+                        <option value="student" selected>Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
 
-                <input type="text" name="name" placeholder="Enter Name" required>
+                    <label for="register-name">Full name</label>
+                    <input id="register-name" type="text" name="name" placeholder="Enter Name" required>
 
-                <input type="email" name="email" placeholder="Enter Email" required>
+                    <label for="register-email">Email</label>
+                    <input id="register-email" type="email" name="email" placeholder="Enter Email" required>
 
-                <div class="mobile-group">
-                    <input type="text" value="+91" readonly class="country-code">
+                    <label for="register-phone">Mobile</label>
+                    <div class="mobile-group">
+                        <input type="text" value="+91" readonly class="country-code">
 
-                    <input type="tel" name="number" class="mobile-number"
-                        placeholder="Enter Mobile Number"
-                        pattern="[6-9][0-9]{9}" maxlength="10" required>
+                        <input id="register-phone" type="tel" name="number" class="mobile-number"
+                            placeholder="Enter Mobile Number"
+                            pattern="[6-9][0-9]{9}" maxlength="10">
+                    </div>
+
+                    <label for="register-subject">Subject (teachers only)</label>
+                    <input id="register-subject" type="text" name="subject" placeholder="e.g. Web Development">
+
+                    <label for="register-password">Password</label>
+                    <input id="register-password" type="password" name="password" placeholder="Enter Password" required>
+
+                    <button type="submit">Register</button>
+                </form>
+
+                <div class="helper">
+                    Already have an account? <a href="/login">Login</a>
                 </div>
-
-                <input type="password" name="password" placeholder="Enter Password" required>
-
-                <button type="submit">Register</button>
-
-            </form>
-
+            </div>
         </div>
     </div>
 

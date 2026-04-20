@@ -5,33 +5,30 @@
     <title>About</title>
 
     <style>
-        body {
-            font-family: Arial;
-            margin: 0;
-            background: #f4f4f4;
-        }
-
-        /* MAIN */
-        .container {
-            padding: 40px;
-            text-align: center;
+        .content {
+            max-width: 980px;
+            margin: 40px auto 70px;
+            padding: 0 18px;
         }
 
         .card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 60%;
-            margin: auto;
-            box-shadow: 0 0 10px gray;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 28px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
         }
 
         h1 {
-            margin-bottom: 15px;
+            margin: 0 0 12px;
+            font-size: 28px;
+            font-family: "Fraunces", serif;
         }
 
         p {
             line-height: 1.6;
+            margin: 0 0 12px;
+            color: var(--muted);
         }
     </style>
 </head>
@@ -41,9 +38,9 @@
     <%- include("partials/navbar") %>
 
     <!-- About Content -->
-    <div class="container">
+    <div class="content">
         <div class="card">
-            <h1>About E-Learning 📘</h1>
+            <h1>About E-Learning</h1>
 
             <p>
                 Welcome to our E-Learning platform! This project is designed to help students 

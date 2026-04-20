@@ -1,6 +1,9 @@
 <footer class="footer">
     <div class="footer-content">
-        <p>© 2026 E-Learning | All Rights Reserved</p>
+        <div>
+            <p>© 2026 E-Learning | All Rights Reserved</p>
+            <small>Learning journeys powered by focus and community.</small>
+        </div>
 
         <div class="footer-links">
             <a href="/about">About</a>
@@ -11,31 +14,42 @@
 </footer>
 
 <style>
-.footer {
-    background: #333;
-    color: white;
-    padding: 15px 20px;
-    margin-top: auto;
-}
+    .footer {
+        margin-top: auto;
+        background: rgba(255, 255, 255, 0.9);
+        border-top: 1px solid var(--line);
+        padding: 18px 22px;
+        color: var(--muted);
+    }
 
-.footer-content {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-}
+    .footer-content {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 13px;
+    }
 
-.footer-links {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-}
+    .footer small {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+    }
 
-.footer a {
-    color: white;
-    text-decoration: none;
-}
+    .footer-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
 
-.footer a:hover {
-    color: yellow;
-}
+    .footer a {
+        color: var(--muted);
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .footer a:hover {
+        color: var(--accent-dark);
+    }
 </style>

@@ -6,31 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Space+Grotesk:wght@500;700&display=swap");
-
-        :root {
-            --ink: #0f172a;
-            --muted: #5b6575;
-            --accent: #12b981;
-            --accent-dark: #0f8f63;
-            --nav: #131722;
-            --surface: #ffffff;
-            --line: #e6e9ef;
-            --shadow: 0 16px 36px rgba(15, 23, 42, 0.15);
-        }
-
-        html, body {
-            min-height: 100vh;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: "Manrope", sans-serif;
+        body.dashboard {
             color: var(--ink);
-            background: radial-gradient(circle at 20% 10%, #e2f7f0 0%, #f4f6fb 35%, #f1f3f8 100%);
-            display: flex;
-            flex-direction: column;
         }
 
         .page-shell {
@@ -39,88 +16,32 @@
             flex-direction: column;
         }
 
-        .navbar {
-            background: var(--nav);
-            padding: 16px 28px;
-            color: white;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            position: sticky;
-            top: 0;
-            z-index: 5;
-        }
-
-        .logo {
-            flex: 1;
-            font-family: "Space Grotesk", sans-serif;
-            font-weight: 700;
-            letter-spacing: 0.4px;
-        }
-
-        .nav-left {
-            flex: 2;
-            display: flex;
-            justify-content: center;
-            gap: 22px;
-            font-size: 14px;
-        }
-
-        .nav-right {
-            flex: 1;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .navbar a {
-            color: #e2e8f0;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .navbar a:hover {
-            color: white;
-        }
-
-        .nav-right a {
-            background: #ff5a5f;
-            padding: 7px 16px;
-            border-radius: 999px;
-        }
-
         .container {
             flex: 1;
-            max-width: 1080px;
+            max-width: 1400px;
             width: 100%;
-            margin: 0 auto;
-            padding: 36px 24px 60px;
+            margin: 28px auto 70px;
+            padding: 0 28px;
             display: grid;
-            grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
-            gap: 24px;
+            grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.9fr);
+            gap: 22px;
         }
 
-        .hero {
-            background: var(--surface);
-            border-radius: 18px;
-            padding: 30px;
-            box-shadow: var(--shadow);
+        .hero,
+        .profile,
+        .panel,
+        .stack {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            padding: 24px;
             border: 1px solid var(--line);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(130deg, rgba(18, 185, 129, 0.15), rgba(18, 185, 129, 0));
-            pointer-events: none;
+            box-shadow: var(--shadow);
         }
 
         .hero h1 {
             margin: 0 0 6px;
-            font-family: "Space Grotesk", sans-serif;
-            font-size: 28px;
+            font-size: 26px;
+            font-family: "Fraunces", serif;
         }
 
         .hero p {
@@ -129,17 +50,17 @@
         }
 
         .stats {
-            margin-top: 20px;
+            margin-top: 16px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 12px;
         }
 
         .stat {
-            background: #f6f8fc;
+            background: #fffaf4;
             border-radius: 12px;
             padding: 12px 14px;
-            border: 1px solid #eef1f6;
+            border: 1px solid var(--line);
         }
 
         .stat strong {
@@ -148,33 +69,209 @@
         }
 
         .stat span {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--muted);
         }
 
-        .profile {
-            background: var(--surface);
-            border-radius: 18px;
-            padding: 26px;
-            box-shadow: var(--shadow);
+        .stat small {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .quick-links {
+            margin-top: 18px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .quick-links a {
+            text-decoration: none;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: linear-gradient(135deg, rgba(240, 97, 58, 0.15), rgba(31, 138, 112, 0.15));
             border: 1px solid var(--line);
+            color: var(--ink);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .panel {
+            margin-top: 18px;
+        }
+
+        .panel h2,
+        .stack h2 {
+            margin: 0 0 14px;
+            font-size: 18px;
+            font-family: "Fraunces", serif;
+        }
+
+        .course-progress {
             display: grid;
             gap: 14px;
         }
 
-        .profile h2 {
+        .live-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+        }
+
+        .live-card {
+            background: #fffaf4;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 14px;
+            display: grid;
+            gap: 8px;
+        }
+
+        .live-card strong {
+            font-size: 14px;
+        }
+
+        .live-card span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .course-card {
+            background: #fffaf4;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .course-card h3 {
             margin: 0;
-            font-family: "Space Grotesk", sans-serif;
+            font-size: 16px;
+        }
+
+        .course-meta {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #efe4da;
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            border-radius: 999px;
+        }
+
+        .progress-72 span { width: 72%; }
+        .progress-45 span { width: 45%; }
+
+        .task-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .task {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fffaf4;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px 14px;
+        }
+
+        .task strong {
+            font-size: 14px;
+        }
+
+        .task span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .stack {
+            margin-top: 18px;
+            display: grid;
+            gap: 18px;
+        }
+
+        .resource-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .resource {
+            background: #fffaf4;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+
+        .resource span {
+            color: var(--muted);
+        }
+
+        .info-card {
+            background: #fffaf4;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .info-card h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .info-card p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(240, 97, 58, 0.15);
+            border: 1px solid var(--line);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+            width: fit-content;
+        }
+
+        .profile h2 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            font-family: "Fraunces", serif;
         }
 
         .profile p {
-            margin: 0;
+            margin: 0 0 6px;
             color: var(--muted);
         }
 
         .actions {
             display: grid;
-            gap: 10px;
+            gap: 8px;
+            margin-top: 10px;
         }
 
         .actions a {
@@ -182,103 +279,146 @@
             padding: 10px 14px;
             background: var(--accent);
             color: white;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 600;
+            border-radius: 999px;
+            font-size: 13px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: transform 0.2s ease, background 0.2s ease;
-        }
-
-        .actions a.secondary {
-            background: #111827;
+            font-weight: 600;
         }
 
         .actions a:hover {
             background: var(--accent-dark);
-            transform: translateY(-1px);
-        }
-
-        .actions a.secondary:hover {
-            background: #0b1220;
-        }
-
-        .fade-in {
-            animation: fadeUp 0.7s ease both;
-        }
-
-        .delay-1 {
-            animation-delay: 0.1s;
-        }
-
-        .delay-2 {
-            animation-delay: 0.2s;
-        }
-
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         @media (max-width: 900px) {
             .container {
                 grid-template-columns: 1fr;
             }
-
-            .nav-left {
-                display: none;
-            }
         }
     </style>
 </head>
 
-<body>
+<body class="dashboard">
     <div class="page-shell">
-        <!-- 🔥 NAVBAR -->
-        <div class="navbar fade-in">
-            <div class="logo">E-Learning Dashboard</div>
-
-            <div class="nav-left">
-                <a href="/courses">Courses</a>
-                <a href="/live">Live Classes</a>
-                <a href="/timeTable">Time Table</a>
-                <a href="/upComing">UpComing Class</a>
-            </div>
-
-            <div class="nav-right">
-                <a href="/logout">Logout</a>
-            </div>
-        </div>
+        <%- include("partials/navbar") %>
 
         <div class="container">
-            <section class="hero fade-in delay-1">
-                <h1>Welcome back, <%= user.name %> 👋</h1>
-                <p>Quickly jump into your learning flow and track progress.</p>
+            <div>
+                <section class="hero">
+                    <h1>Welcome back, <%= user.name %></h1>
+                    <p>Pick up where you left off and keep your momentum high.</p>
 
-                <div class="stats">
-                    <div class="stat">
-                        <strong>08</strong>
-                        <span>Courses enrolled</span>
+                    <div class="stats">
+                        <div class="stat">
+                            <strong>08</strong>
+                            <span>Courses enrolled</span>
+                            <small>2 in progress</small>
+                        </div>
+                        <div class="stat">
+                            <strong>76%</strong>
+                            <span>Weekly progress</span>
+                            <small>+8% vs last week</small>
+                        </div>
+                        <div class="stat">
+                            <strong>12</strong>
+                            <span>Practice sprints</span>
+                            <small>Last 7 days</small>
+                        </div>
                     </div>
-                    <div class="stat">
-                        <strong>76%</strong>
-                        <span>Weekly progress</span>
-                    </div>
-                    <div class="stat">
-                        <strong>04</strong>
-                        <span>Live sessions</span>
-                    </div>
-                </div>
-            </section>
 
-            <aside class="profile fade-in delay-2">
+                    <div class="quick-links">
+                        <a href="/courses">Browse courses</a>
+                        <a href="/timeTable">Weekly plan</a>
+                        <a href="/upComing">Upcoming lessons</a>
+                        <a href="/feedback">Give feedback</a>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h2>Continue learning</h2>
+                    <div class="course-progress">
+                        <div class="course-card">
+                            <h3>JavaScript Essentials</h3>
+                            <div class="course-meta">Module 4 of 7 · 12 lessons left</div>
+                            <div class="progress-bar progress-72"><span></span></div>
+                        </div>
+                        <div class="course-card">
+                            <h3>UI/UX Basics</h3>
+                            <div class="course-meta">Module 2 of 5 · 6 lessons left</div>
+                            <div class="progress-bar progress-45"><span></span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h2>This week focus</h2>
+                    <div class="task-list">
+                        <div class="task">
+                            <div>
+                                <strong>Finish DOM practice set</strong>
+                                <span>Due Thursday</span>
+                            </div>
+                            <strong>3/6</strong>
+                        </div>
+                        <div class="task">
+                            <div>
+                                <strong>Submit mini project</strong>
+                                <span>Due Sunday</span>
+                            </div>
+                            <strong>Draft</strong>
+                        </div>
+                        <div class="task">
+                            <div>
+                                <strong>Review weekly recap</strong>
+                                <span>20 min</span>
+                            </div>
+                            <strong>New</strong>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h2>Live classes</h2>
+                    <div class="live-grid">
+                        <div class="live-card">
+                            <strong>Frontend clinic</strong>
+                            <span>Tuesday · 6:00 PM</span>
+                            <span>Topic: Layout fixes</span>
+                        </div>
+                        <div class="live-card">
+                            <strong>JavaScript Q&A</strong>
+                            <span>Thursday · 7:30 PM</span>
+                            <span>Topic: Async patterns</span>
+                        </div>
+                        <div class="live-card">
+                            <strong>Project review</strong>
+                            <span>Saturday · 4:00 PM</span>
+                            <span>Topic: Mini project demo</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel">
+                    <h2>Schedule & live class</h2>
+                    <% if (enrollment) { %>
+                        <div class="info-card">
+                            <span class="tag">Enrolled</span>
+                            <h3><%= enrollment.course %></h3>
+                            <p><strong>Time table:</strong> <%= enrollment.schedule %></p>
+                            <p><strong>Live class:</strong> <%= enrollment.live %></p>
+                        </div>
+                    <% } else { %>
+                        <div class="info-card">
+                            <h3>Enroll to unlock your schedule</h3>
+                            <p>Select a course first, then your timetable and live class timings will appear here.</p>
+                            <a class="btn primary" href="/courses">Enroll in a course</a>
+                        </div>
+                    <% } %>
+                </section>
+            </div>
+
+            <aside class="profile">
                 <div>
                     <h2>Your Profile</h2>
                     <p><strong>Name:</strong> <%= user.name %></p>
@@ -287,6 +427,32 @@
 
                 <div class="actions">
                     <a href="/courses">Continue Learning<span>→</span></a>
+                </div>
+
+                <div class="stack">
+                    <div>
+                        <h2>Streak</h2>
+                        <p><strong>6 days</strong> learning streak</p>
+                        <p class="course-meta">Keep the momentum for 7/7 week goal.</p>
+                    </div>
+
+                    <div>
+                        <h2>Resources</h2>
+                        <div class="resource-grid">
+                            <div class="resource">
+                                <div>Weekly recap</div>
+                                <span>PDF</span>
+                            </div>
+                            <div class="resource">
+                                <div>Practice checklist</div>
+                                <span>Notion</span>
+                            </div>
+                            <div class="resource">
+                                <div>Project brief</div>
+                                <span>Doc</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </aside>
         </div>

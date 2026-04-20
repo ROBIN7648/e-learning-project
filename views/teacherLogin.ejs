@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Teacher Login</title>
 
     <style>
         * {
@@ -74,15 +74,6 @@
             background: #ffffff;
         }
 
-        select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--line);
-            border-radius: 10px;
-            font-size: 14px;
-            background: #ffffff;
-        }
-
         button {
             width: 100%;
             padding: 10px 12px;
@@ -133,55 +124,40 @@
 
     <%- include("partials/navbar") %>
 
-    <!-- 🔥 MAIN CENTER -->
     <div class="auth-main">
         <div class="auth-shell">
             <div class="auth-left">
-                <h2>Welcome back</h2>
-                <p>Log in to continue your learning plan and track progress.</p>
-                <p>Access courses, live classes, and your dashboard in one place.</p>
+                <h2>Teacher access</h2>
+                <p>Log in to manage your classes, schedules, and student progress.</p>
+                <p>Keep your teaching plan organized in one space.</p>
             </div>
 
             <div class="auth-card">
-                <h3>Login</h3>
+                <h3>Teacher Login</h3>
 
                 <% if (typeof error !== "undefined") { %>
                     <p class="msg"><%= error %></p>
                 <% } %>
 
-                <form action="/login" method="POST">
-                    <label for="login-role">Role</label>
-                    <select id="login-role" name="role" required>
-                        <option value="student" selected>Student</option>
-                        <option value="teacher">Teacher</option>
-                    </select>
+                <form action="/teacher/login" method="POST">
+                    <label for="teacher-email">Email</label>
+                    <input id="teacher-email" type="email" name="email" placeholder="Enter Email" required>
 
-                    <label for="login-email">Email</label>
-                    <input id="login-email" type="email" name="email" placeholder="Enter Email" required>
-
-                    <label for="login-password">Password</label>
-                    <input id="login-password" type="password" name="password" placeholder="Enter Password" required>
+                    <label for="teacher-password">Password</label>
+                    <input id="teacher-password" type="password" name="password" placeholder="Enter Password" required>
 
                     <button type="submit">Login</button>
                 </form>
 
                 <div class="helper">
-                    New here? <a href="/register">Create an account</a>
+                    New instructor? <a href="/teacher/register">Create a teacher account</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <%- include("partials/footer") %>
 
 </body>
-
-<script>
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get("success") === "1") {
-        alert("Registration Successful ✅");
-    }
-</script>
 
 </html>

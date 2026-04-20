@@ -1,45 +1,133 @@
 <div class="navbar">
-    <div><b>E-Learning</b></div>
+    <div class="brand">
+        <span class="brand-mark">EL</span>
+        <span class="brand-text">E-Learning</span>
+    </div>
 
-    <div>
+    <div class="nav-links">
         <a href="/">Home</a>
 
-        <% if (user) { %>
+        <% if (teacher) { %>
+            <a href="/teacher/dashboard">Dashboard</a>
+            <a class="cta" href="/logout">Logout</a>
+        <% } else if (user) { %>
             <a href="/dashboard">Dashboard</a>
-            <a href="/logout">Logout</a>
+            <a class="cta" href="/logout">Logout</a>
         <% } else { %>
-            <a href="/register">Register</a>
+            <a class="cta" href="/register">Register</a>
             <a href="/login">Login</a>
         <% } %>
     </div>
 </div>
 
 <style>
-html, body {
-    min-height: 100vh;
-    margin: 0;
-}
+    @import url("https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Space+Grotesk:wght@400;500;600&display=swap");
 
-body {
-    display: flex;
-    flex-direction: column;
-}
+    :root {
+        --bg: #f6efe6;
+        --surface: #ffffff;
+        --ink: #1f1a16;
+        --muted: #635d55;
+        --accent: #f0613a;
+        --accent-dark: #c94a27;
+        --accent-2: #1f8a70;
+        --line: #e7dbcf;
+        --shadow: 0 22px 45px rgba(27, 20, 15, 0.12);
+        --radius: 16px;
+    }
 
-.navbar {
-    background: #333;
-    padding: 15px 20px;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-}
+    * {
+        box-sizing: border-box;
+    }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin-left: 15px;
-}
+    html, body {
+        min-height: 100vh;
+        margin: 0;
+    }
 
-.navbar a:hover {
-    color: yellow;
-}
+    body {
+        display: flex;
+        flex-direction: column;
+        font-family: "Space Grotesk", sans-serif;
+        background: radial-gradient(circle at 15% 10%, #fbe8d4 0%, transparent 40%),
+            radial-gradient(circle at 90% 0%, #e8f3ee 0%, transparent 45%),
+            var(--bg);
+        color: var(--ink);
+    }
+
+    .navbar {
+        background: rgba(255, 255, 255, 0.92);
+        border-bottom: 1px solid var(--line);
+        padding: 14px 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        backdrop-filter: blur(10px);
+    }
+
+    .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 700;
+        font-size: 18px;
+        letter-spacing: 0.2px;
+        font-family: "Fraunces", serif;
+    }
+
+    .brand-mark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), var(--accent-2));
+        color: white;
+        font-weight: 700;
+        font-size: 13px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 14px;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .navbar a {
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    .navbar a:hover {
+        color: var(--accent-dark);
+    }
+
+    .nav-links .cta {
+        padding: 8px 16px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+        box-shadow: 0 10px 24px rgba(240, 97, 58, 0.25);
+    }
+
+    .nav-links .cta:hover {
+        background: var(--accent-dark);
+        color: white;
+    }
+
+    @media (max-width: 720px) {
+        .navbar {
+            flex-wrap: wrap;
+        }
+    }
 </style>

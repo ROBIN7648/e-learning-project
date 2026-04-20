@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body.teacher {
+            color: var(--ink);
+        }
+
+        .page-shell {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
+            width: 100%;
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 28px 18px 70px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 18px;
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            padding: 24px;
+            border: 1px solid var(--line);
+            display: grid;
+            gap: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            margin: 0 0 6px;
+            font-size: 26px;
+            font-family: "Fraunces", serif;
+        }
+
+        .hero p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .pill-button {
+            text-decoration: none;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 24px rgba(240, 97, 58, 0.25);
+        }
+
+        .pill-button.secondary {
+            background: #fffaf4;
+            color: var(--ink);
+            border: 1px solid var(--line);
+            box-shadow: none;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 12px;
+        }
+
+        .stat {
+            background: #fffaf4;
+            border-radius: 12px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            display: grid;
+            gap: 4px;
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 18px;
+        }
+
+        .stat span {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .board {
+            display: grid;
+            gap: 12px;
+        }
+
+        .board-card {
+            background: rgba(255, 255, 255, 0.92);
+            border-radius: 12px;
+            padding: 14px;
+            border: 1px solid var(--line);
+            display: grid;
+            gap: 10px;
+        }
+
+        .board-card h3 {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .board-meta {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .progress {
+            height: 6px;
+            border-radius: 999px;
+            background: #efe4da;
+            overflow: hidden;
+        }
+
+        .progress span {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            border-radius: 999px;
+        }
+
+        .progress.w55 span { width: 55%; }
+        .progress.w80 span { width: 80%; }
+        .progress.w35 span { width: 35%; }
+
+        .side-panel {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 18px;
+            padding: 22px;
+            border: 1px solid var(--line);
+            display: grid;
+            gap: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .side-panel h2 {
+            margin: 0;
+            font-family: "Fraunces", serif;
+        }
+
+        .profile-card {
+            background: #fffaf4;
+            color: var(--ink);
+            border-radius: 12px;
+            padding: 14px;
+            display: grid;
+            gap: 8px;
+            border: 1px solid var(--line);
+        }
+
+        .profile-card span {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted);
+        }
+
+        .tasks {
+            display: grid;
+            gap: 12px;
+        }
+
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #fffaf4;
+            border: 1px solid var(--line);
+        }
+
+        .task-item strong {
+            font-size: 14px;
+        }
+
+        .task-item span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .actions {
+            display: grid;
+            gap: 10px;
+        }
+
+        .actions a {
+            text-decoration: none;
+            padding: 10px 14px;
+            background: var(--accent);
+            color: white;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .actions a.secondary {
+            background: #fffaf4;
+            color: var(--ink);
+            border: 1px solid var(--line);
+        }
+
+        @media (max-width: 980px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="teacher">
+    <div class="page-shell">
+        <%- include("partials/navbar") %>
+
+        <div class="container">
+            <section class="hero">
+                <div>
+                    <h1>Welcome back, <%= teacher.name %></h1>
+                    <p>Plan your week, track classes, and keep your learners on pace.</p>
+                </div>
+
+                <div class="hero-actions">
+                    <a class="pill-button" href="/timeTable">Create Schedule<span>+</span></a>
+                    <a class="pill-button secondary" href="/courses">Manage Courses</a>
+                </div>
+
+                <div class="stats">
+                    <div class="stat">
+                        <strong>05</strong>
+                        <span>Active classes</span>
+                    </div>
+                    <div class="stat">
+                        <strong>132</strong>
+                        <span>Total students</span>
+                    </div>
+                    <div class="stat">
+                        <strong>18</strong>
+                        <span>Assignments to review</span>
+                    </div>
+                </div>
+
+                <div class="board">
+                    <div class="board-card">
+                        <h3>Design Foundations</h3>
+                        <div class="board-meta">Next lesson: Visual hierarchy</div>
+                        <div class="progress w80"><span></span></div>
+                    </div>
+                    <div class="board-card">
+                        <h3>Full Stack Lab</h3>
+                        <div class="board-meta">Next lesson: RESTful APIs</div>
+                        <div class="progress w55"><span></span></div>
+                    </div>
+                    <div class="board-card">
+                        <h3>Interview Prep</h3>
+                        <div class="board-meta">Next lesson: Mock interviews</div>
+                        <div class="progress w35"><span></span></div>
+                    </div>
+                </div>
+            </section>
+
+            <aside class="side-panel">
+                <div>
+                    <h2>Your Panel</h2>
+                    <p>Quick access to the tasks that need your attention today.</p>
+                </div>
+
+                <div class="profile-card">
+                    <span>Instructor</span>
+                    <strong><%= teacher.name %></strong>
+                    <div><%= teacher.email %></div>
+                    <div><strong>Subject:</strong> <%= teacher.subject %></div>
+                </div>
+
+                <div class="tasks">
+                    <div class="task-item">
+                        <div>
+                            <strong>Check assignment submissions</strong>
+                            <span>Due by 4:00 PM</span>
+                        </div>
+                        <strong>12</strong>
+                    </div>
+                    <div class="task-item">
+                        <div>
+                            <strong>Prepare live session</strong>
+                            <span>Tomorrow 10:00 AM</span>
+                        </div>
+                        <strong>Live</strong>
+                    </div>
+                    <div class="task-item">
+                        <div>
+                            <strong>Update course outline</strong>
+                            <span>Next week</span>
+                        </div>
+                        <strong>3</strong>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <a href="/feedback">Review Feedback<span>+</span></a>
+                    <a class="secondary" href="/timeTable">Update Schedule<span>></span></a>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <%- include("partials/footer") %>
+</body>
+</html>

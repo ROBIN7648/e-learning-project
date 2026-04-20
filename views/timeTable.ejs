@@ -5,39 +5,68 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><%= title || "Time Table" %></title>
 	<style>
-		body {
-			margin: 0;
-			font-family: Arial, sans-serif;
-			background: #f4f4f4;
-		}
-
 		.content {
-			max-width: 960px;
-			margin: 48px auto;
-			padding: 0 20px 40px;
+			max-width: 1400px;
+			margin: 40px auto 70px;
+			padding: 0 28px;
 		}
 
 		.panel {
-			background: white;
-			border-radius: 16px;
-			padding: 32px;
-			box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 18px;
+			padding: 26px;
+			border: 1px solid var(--line);
+			box-shadow: var(--shadow);
+		}
+
+		.layout {
+			display: grid;
+			grid-template-columns: minmax(0, 1.6fr) minmax(0, 0.9fr);
+			gap: 18px;
 		}
 
 		table {
 			width: 100%;
 			border-collapse: collapse;
-			margin-top: 18px;
+			margin-top: 16px;
+			font-size: 14px;
 		}
 
 		th, td {
-			border: 1px solid #e3e8ef;
-			padding: 14px;
+			border: 1px solid var(--line);
+			padding: 12px;
 			text-align: left;
 		}
 
 		th {
-			background: #eef4ff;
+			background: #fff0e4;
+			font-weight: 600;
+		}
+
+		.side-card {
+			background: #fffaf4;
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			padding: 16px;
+			margin-top: 16px;
+		}
+
+		.side-card h3 {
+			margin: 0 0 10px;
+			font-size: 16px;
+		}
+
+		.side-card ul {
+			margin: 0;
+			padding-left: 18px;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		@media (max-width: 980px) {
+			.layout {
+				grid-template-columns: 1fr;
+			}
 		}
 	</style>
 </head>
@@ -49,28 +78,73 @@
 			<h1>Time Table</h1>
 			<p>Weekly schedule for classes and self-study blocks.</p>
 
-			<table>
-				<tr>
-					<th>Day</th>
-					<th>Topic</th>
-					<th>Time</th>
-				</tr>
-				<tr>
-					<td>Monday</td>
-					<td>Frontend Basics</td>
-					<td>10:00 AM</td>
-				</tr>
-				<tr>
-					<td>Wednesday</td>
-					<td>JavaScript Practice</td>
-					<td>2:00 PM</td>
-				</tr>
-				<tr>
-					<td>Friday</td>
-					<td>Live Q&A</td>
-					<td>7:00 PM</td>
-				</tr>
-			</table>
+			<div class="layout">
+				<div>
+					<table>
+						<tr>
+							<th>Day</th>
+							<th>Topic</th>
+							<th>Time</th>
+							<th>Mode</th>
+						</tr>
+						<tr>
+							<td>Monday</td>
+							<td>Frontend Basics</td>
+							<td>10:00 AM</td>
+							<td>Workshop</td>
+						</tr>
+						<tr>
+							<td>Tuesday</td>
+							<td>JavaScript Core</td>
+							<td>4:00 PM</td>
+							<td>Practice</td>
+						</tr>
+						<tr>
+							<td>Wednesday</td>
+							<td>UI/UX Foundations</td>
+							<td>12:30 PM</td>
+							<td>Studio</td>
+						</tr>
+						<tr>
+							<td>Thursday</td>
+							<td>Backend Essentials</td>
+							<td>6:00 PM</td>
+							<td>Lab</td>
+						</tr>
+						<tr>
+							<td>Friday</td>
+							<td>Live Q&A</td>
+							<td>7:00 PM</td>
+							<td>Live</td>
+						</tr>
+						<tr>
+							<td>Saturday</td>
+							<td>Project Review</td>
+							<td>4:00 PM</td>
+							<td>Live</td>
+						</tr>
+					</table>
+				</div>
+				<div>
+					<div class="side-card">
+						<h3>Weekly goals</h3>
+						<ul>
+							<li>Complete 2 practice sets</li>
+							<li>Watch the recap videos</li>
+							<li>Submit mini project draft</li>
+							<li>Attend at least 1 live session</li>
+						</ul>
+					</div>
+					<div class="side-card">
+						<h3>Office hours</h3>
+						<ul>
+							<li>Mon · 5:00 PM</li>
+							<li>Wed · 3:00 PM</li>
+							<li>Fri · 1:00 PM</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 		</section>
 	</main>
 

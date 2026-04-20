@@ -10,48 +10,58 @@
 			box-sizing: border-box;
 		}
 
-		body {
-			font-family: Arial;
-			margin: 0;
-			background: #f4f4f4;
+		.page {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 40px 18px 70px;
 		}
 
 		.container {
-			width: 420px;
-			margin: 80px auto;
-			background: white;
-			padding: 30px;
-			border-radius: 12px;
-			box-shadow: 0 0 15px rgba(0,0,0,0.15);
+			width: 100%;
+			max-width: 420px;
+			background: rgba(255, 255, 255, 0.95);
+			padding: 26px;
+			border-radius: 16px;
+			border: 1px solid var(--line);
+			box-shadow: var(--shadow);
 		}
 
 		h2 {
 			text-align: center;
-			margin-bottom: 20px;
+			margin: 0 0 16px;
+			font-size: 22px;
+			font-family: "Fraunces", serif;
 		}
 
 		input, textarea {
 			width: 100%;
-			padding: 12px;
-			margin: 12px 0;
-			border: 1px solid #ccc;
-			border-radius: 6px;
+			padding: 10px 12px;
+			margin: 10px 0;
+			border: 1px solid var(--line);
+			border-radius: 10px;
 			font-size: 14px;
+			background: #fffaf4;
+		}
+
+		textarea {
+			resize: vertical;
 		}
 
 		button {
 			width: 100%;
-			padding: 12px;
-			background: #007bff;
+			padding: 10px 12px;
+			background: linear-gradient(135deg, var(--accent), var(--accent-2));
 			color: white;
 			border: none;
-			border-radius: 6px;
-			font-size: 16px;
+			border-radius: 999px;
+			font-size: 14px;
 			cursor: pointer;
 		}
 
 		button:hover {
-			background: #0056b3;
+			opacity: 0.92;
 		}
 	</style>
 </head>
@@ -59,14 +69,16 @@
 <body>
 	<%- include("partials/navbar") %>
 
-	<div class="container">
-		<h2>Contact Us</h2>
-		<form>
-			<input type="text" name="name" placeholder="Your Name" required>
-			<input type="email" name="email" placeholder="Your Email" required>
-			<textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-			<button type="submit">Send Message</button>
-		</form>
+	<div class="page">
+		<div class="container">
+			<h2>Contact Us</h2>
+			<form>
+				<input type="text" name="name" placeholder="Your Name" required>
+				<input type="email" name="email" placeholder="Your Email" required>
+				<textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+				<button type="submit">Send Message</button>
+			</form>
+		</div>
 	</div>
 
 	<%- include("partials/footer") %>
