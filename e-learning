@@ -1,0 +1,23 @@
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+// Mock Database
+let enrollments = [];
+
+// Enroll in a course
+app.post('/api/enroll', (req, res) => {
+    const { userId, courseId } = req.body;
+    
+    const newEnrollment = {
+        enrollmentId: enrollments.length + 1,
+        userId,
+        courseId,
+        enrolledAt: new Date()
+    };
+
+    enrollments.push(newEnrollment);
+    res.status(201).send({ message: "Successfully enrolled!", data: newEnrollment });
+});
+
+app.listen(3000, () => console.log('LMS Server running on port 3000'));
