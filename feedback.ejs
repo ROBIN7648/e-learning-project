@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .page {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 18px 70px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 26px;
+            border-radius: 16px;
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            margin: 0 0 16px;
+            text-align: center;
+            font-size: 22px;
+            font-family: "Fraunces", serif;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px 12px;
+            margin: 10px 0;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 14px;
+            background: #fffaf4;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: #ffffff;
+            border: none;
+            border-radius: 999px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+
+        button:hover {
+            opacity: 0.92;
+        }
+
+        .msg {
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .error {
+            color: #b91c1c;
+        }
+
+        .success {
+            color: #15803d;
+        }
+    </style>
+</head>
+
+<body>
+
+    <%- include("partials/navbar") %>
+
+    <div class="page">
+        <div class="container">
+            <h2>Feedback</h2>
+
+            <% if (typeof error !== "undefined") { %>
+                <p class="msg error"><%= error %></p>
+            <% } %>
+
+            <% if (typeof success !== "undefined") { %>
+                <p class="msg success"><%= success %></p>
+            <% } %>
+
+            <form action="/feedback" method="POST">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Write your feedback..." rows="4" required></textarea>
+
+                <button type="submit">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <%- include("partials/footer") %>
+
+</body>
+</html>
