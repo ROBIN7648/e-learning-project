@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About</title>
+
+    <style>
+        .content {
+            max-width: 980px;
+            margin: 40px auto 70px;
+            padding: 0 18px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 28px;
+            border-radius: var(--radius);
+            border: 1px solid var(--line);
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: 28px;
+            font-family: "Fraunces", serif;
+        }
+
+        p {
+            line-height: 1.6;
+            margin: 0 0 12px;
+            color: var(--muted);
+        }
+    </style>
+</head>
+
+<body>
+
+    <%- include("partials/navbar") %>
+
+    <!-- About Content -->
+    <div class="content">
+        <div class="card">
+            <h1>About E-Learning</h1>
+
+            <p>
+                Welcome to our E-Learning platform! This project is designed to help students 
+                learn anytime, anywhere with ease and flexibility.
+            </p>
+
+            <p>
+                This platform provides a simple and user-friendly interface where users can 
+                register, login, and access learning resources efficiently.
+            </p>
+
+            <p>
+                Our goal is to make education more accessible and interactive using modern 
+                web technologies.
+            </p>
+
+            <p>
+                This project is developed as a full-stack application using Node.js, Express, 
+                MongoDB, and EJS.
+            </p>
+        </div>
+    </div>
+
+    <%- include("partials/footer") %>
+
+</body>
+</html>
