@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%= title || "Courses" %></title>
+	<style>
+		.content {
+			max-width: 1200px;
+			margin: 40px auto 70px;
+			padding: 0 18px;
+		}
+
+		.panel {
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 18px;
+			padding: 26px;
+			border: 1px solid var(--line);
+			box-shadow: var(--shadow);
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 16px;
+			margin-top: 16px;
+		}
+
+		.card {
+			background: #fffaf4;
+			border: 1px solid var(--line);
+			border-radius: 14px;
+			padding: 16px;
+			box-shadow: 0 10px 18px rgba(27, 20, 15, 0.08);
+			display: grid;
+			gap: 10px;
+		}
+
+		.card p {
+			margin: 0;
+			color: var(--muted);
+			font-size: 14px;
+		}
+
+		.enroll-btn {
+			padding: 8px 14px;
+			border-radius: 999px;
+			border: none;
+			background: linear-gradient(135deg, var(--accent), var(--accent-2));
+			color: #ffffff;
+			font-size: 13px;
+			font-weight: 600;
+			cursor: pointer;
+			justify-self: start;
+		}
+
+		.enroll-btn:hover {
+			opacity: 0.92;
+		}
+
+		@media (max-width: 980px) {
+			.grid {
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+			}
+		}
+
+		@media (max-width: 640px) {
+			.grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<%- include("partials/navbar") %>
+
+	<main class="content">
+		<section class="panel">
+			<h1>Courses</h1>
+			<p>Browse the learning tracks available in the dashboard.</p>
+
+			<div class="grid">
+				<div class="card">
+					<h3>Frontend Basics</h3>
+					<p>HTML, CSS, and responsive design fundamentals.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="Frontend Basics">
+						<input type="hidden" name="schedule" value="Mon & Wed · 10:00 AM">
+						<input type="hidden" name="live" value="Friday · 6:00 PM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+				<div class="card">
+					<h3>React Fundamentals</h3>
+					<p>Components, hooks, and state management patterns.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="React Fundamentals">
+						<input type="hidden" name="schedule" value="Tue & Fri · 11:00 AM">
+						<input type="hidden" name="live" value="Saturday · 4:00 PM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+				<div class="card">
+					<h3>Python for Beginners</h3>
+					<p>Core syntax, loops, functions, and problem solving.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="Python for Beginners">
+						<input type="hidden" name="schedule" value="Mon & Wed · 5:00 PM">
+						<input type="hidden" name="live" value="Thursday · 6:30 PM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+				<div class="card">
+					<h3>JavaScript Core</h3>
+					<p>Variables, functions, DOM, and asynchronous flow.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="JavaScript Core">
+						<input type="hidden" name="schedule" value="Tue & Thu · 2:00 PM">
+						<input type="hidden" name="live" value="Saturday · 5:00 PM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+				<div class="card">
+					<h3>Backend Essentials</h3>
+					<p>Express, MongoDB, sessions, and authentication.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="Backend Essentials">
+						<input type="hidden" name="schedule" value="Mon & Thu · 4:00 PM">
+						<input type="hidden" name="live" value="Sunday · 3:00 PM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+				<div class="card">
+					<h3>MongoDB Basics</h3>
+					<p>Schema design, queries, and aggregation pipelines.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="MongoDB Basics">
+						<input type="hidden" name="schedule" value="Tue & Thu · 3:00 PM">
+						<input type="hidden" name="live" value="Friday · 5:30 PM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+				<div class="card">
+					<h3>UI/UX Foundations</h3>
+					<p>Research, wireframes, and interaction design basics.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="UI/UX Foundations">
+						<input type="hidden" name="schedule" value="Mon & Thu · 12:30 PM">
+						<input type="hidden" name="live" value="Sunday · 2:00 PM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+				<div class="card">
+					<h3>Data Structures</h3>
+					<p>Arrays, stacks, queues, and linked lists practice.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="Data Structures">
+						<input type="hidden" name="schedule" value="Wed & Fri · 9:00 AM">
+						<input type="hidden" name="live" value="Saturday · 1:00 PM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+				<div class="card">
+					<h3>Git & GitHub</h3>
+					<p>Version control, branching workflows, collaboration.</p>
+					<form action="/enroll" method="POST">
+						<input type="hidden" name="course" value="Git & GitHub">
+						<input type="hidden" name="schedule" value="Tue & Thu · 6:00 PM">
+						<input type="hidden" name="live" value="Sunday · 11:00 AM">
+						<button class="enroll-btn" type="submit">Enroll</button>
+					</form>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<%- include("partials/footer") %>
+</body>
+</html>
