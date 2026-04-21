@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body.auth {
+            color: var(--ink);
+        }
+
+        .auth-main {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px 12px 60px;
+        }
+
+        .auth-shell {
+            width: 100%;
+            max-width: 980px;
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 24px;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .auth-left h2 {
+            margin: 0 0 10px;
+            font-family: "Fraunces", serif;
+            font-size: 30px;
+        }
+
+        .auth-left p {
+            margin: 0 0 14px;
+            color: var(--muted);
+        }
+
+        .auth-card {
+            background: #fffaf4;
+            border: 1px solid var(--line);
+            border-radius: 14px;
+            padding: 20px;
+        }
+
+        .auth-card h3 {
+            margin: 0 0 14px;
+            font-size: 18px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            margin: 10px 0 6px;
+            color: var(--muted);
+        }
+
+        input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 14px;
+            background: #ffffff;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-size: 14px;
+            background: #ffffff;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px 12px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            color: white;
+            border: none;
+            border-radius: 999px;
+            margin-top: 14px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        button:hover {
+            opacity: 0.92;
+        }
+
+        .msg {
+            margin: 0 0 10px;
+            color: #b91c1c;
+            font-size: 13px;
+        }
+
+        .helper {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .helper a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .helper a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .auth-shell {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body class="auth">
+
+    <%- include("partials/navbar") %>
+
+    <!-- 🔥 MAIN CENTER -->
+    <div class="auth-main">
+        <div class="auth-shell">
+            <div class="auth-left">
+                <h2>Welcome back</h2>
+                <p>Log in to continue your learning plan and track progress.</p>
+                <p>Access courses, live classes, and your dashboard in one place.</p>
+            </div>
+
+            <div class="auth-card">
+                <h3>Login</h3>
+
+                <% if (typeof error !== "undefined") { %>
+                    <p class="msg"><%= error %></p>
+                <% } %>
+
+                <form action="/login" method="POST">
+                    <label for="login-role">Role</label>
+                    <select id="login-role" name="role" required>
+                        <option value="student" selected>Student</option>
+                        <option value="teacher">Teacher</option>
+                    </select>
+
+                    <label for="login-email">Email</label>
+                    <input id="login-email" type="email" name="email" placeholder="Enter Email" required>
+
+                    <label for="login-password">Password</label>
+                    <input id="login-password" type="password" name="password" placeholder="Enter Password" required>
+
+                    <button type="submit">Login</button>
+                </form>
+
+                <div class="helper">
+                    New here? <a href="/register">Create an account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <%- include("partials/footer") %>
+
+</body>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get("success") === "1") {
+        alert("Registration Successful ✅");
+    }
+</script>
+
+</html>
