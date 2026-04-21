@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contact</title>
+
+	<style>
+		* {
+			box-sizing: border-box;
+		}
+
+		.page {
+			flex: 1;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 40px 18px 70px;
+		}
+
+		.container {
+			width: 100%;
+			max-width: 420px;
+			background: rgba(255, 255, 255, 0.95);
+			padding: 26px;
+			border-radius: 16px;
+			border: 1px solid var(--line);
+			box-shadow: var(--shadow);
+		}
+
+		h2 {
+			text-align: center;
+			margin: 0 0 16px;
+			font-size: 22px;
+			font-family: "Fraunces", serif;
+		}
+
+		input, textarea {
+			width: 100%;
+			padding: 10px 12px;
+			margin: 10px 0;
+			border: 1px solid var(--line);
+			border-radius: 10px;
+			font-size: 14px;
+			background: #fffaf4;
+		}
+
+		textarea {
+			resize: vertical;
+		}
+
+		button {
+			width: 100%;
+			padding: 10px 12px;
+			background: linear-gradient(135deg, var(--accent), var(--accent-2));
+			color: white;
+			border: none;
+			border-radius: 999px;
+			font-size: 14px;
+			cursor: pointer;
+		}
+
+		button:hover {
+			opacity: 0.92;
+		}
+	</style>
+</head>
+
+<body>
+	<%- include("partials/navbar") %>
+
+	<div class="page">
+		<div class="container">
+			<h2>Contact Us</h2>
+			<form>
+				<input type="text" name="name" placeholder="Your Name" required>
+				<input type="email" name="email" placeholder="Your Email" required>
+				<textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+				<button type="submit">Send Message</button>
+			</form>
+		</div>
+	</div>
+
+	<%- include("partials/footer") %>
+</body>
+</html>
