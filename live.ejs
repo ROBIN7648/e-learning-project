@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%= title || "Live Classes" %></title>
+	<style>
+		.content {
+			max-width: 1020px;
+			margin: 40px auto 70px;
+			padding: 0 18px;
+		}
+
+		.panel {
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 18px;
+			padding: 26px;
+			border: 1px solid var(--line);
+			box-shadow: var(--shadow);
+		}
+
+		.session {
+			margin-top: 16px;
+			padding: 12px 14px;
+			border: 1px solid var(--line);
+			background: #fffaf4;
+			border-radius: 12px;
+		}
+	</style>
+</head>
+<body>
+	<%- include("partials/navbar") %>
+
+	<main class="content">
+		<section class="panel">
+			<h1>Live Classes</h1>
+			<p>Upcoming live sessions will appear here once scheduled.</p>
+
+			<div class="session">
+				<strong>Next session:</strong> Web Development Q&A
+				<div>Friday, 7:00 PM</div>
+			</div>
+		</section>
+	</main>
+
+	<%- include("partials/footer") %>
+</body>
+</html>
